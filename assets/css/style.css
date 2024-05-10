@@ -441,9 +441,9 @@ a:hover{
     .hero-portrait .pic {
         width: 100%;
         background-size: cover;
-        background-position: center;
+        background-position: top;
         background-repeat: no-repeat;
-        background-image: url(/assets/images/portrait.webp);
+        background-image: url(../../IMG_4930.PNG);
     }
 
     .hero-content{

@@ -13,7 +13,7 @@
 
 - 👯 I’m looking to collaborate on **Javascript Projects**
 
-- 👨‍💻 All of my projects are available at [emmanuelfestus.netlify.app](emmanuelfestus.netlify.app)
+- 👨‍💻 All of my projects are available at [aikay-dev.vercel.app](https://aikay-dev.vercel.app/)
 
 - 💬 Ask me about **React, MERN and Node.js**
 

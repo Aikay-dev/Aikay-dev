@@ -13,13 +13,11 @@
 
 - 👯 I’m looking to collaborate on **Javascript Projects**
 
-- 👨‍💻 All of my projects are available at [emmanuelfestus.netlify.app](emmanuelfestus.netlify.app)
+- 👨‍💻 All of my projects are available at [aikay-dev.vercel.app](https://aikay-dev.vercel.app/)
 
 - 💬 Ask me about **React, MERN and Node.js**
 
 - 📫 How to reach me **emmanese2020@gmail.com**
-
-- 📄 Know about my experiences [https://emmanuelfestus.netlify.app/EMMANUEL%20FESTUS'S%20RESUME.pdf](https://emmanuelfestus.netlify.app/EMMANUEL%20FESTUS'S%20RESUME.pdf)
 
 - ⚡ Fun fact **I code in my head**
 <p align="center"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=generalaike" alt="generalaike" /></a> </p>

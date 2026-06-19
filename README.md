@@ -7,20 +7,19 @@
 
 <p align="left"> <a href="https://twitter.com/@general_ik" target="blank"><img src="https://img.shields.io/twitter/follow/@general_ik?logo=twitter&style=for-the-badge" alt="@general_ik" /></a> </p>
 
-- 🔭 I’m currently working on **Web shop applications**
+- 🔭 I'm currently working on **Production engineering, observability infrastructure, and building reliable systems at scale**
 
-- 🌱 I’m currently learning **Javascript and React**
+- 🌱 I'm currently learning **Go, advanced Kubernetes, Victoria Metrics, and SRE best practices**
 
-- 👯 I’m looking to collaborate on **Javascript Projects**
+- 👯 I'm looking to collaborate on **Infrastructure as Code, observability solutions, and open-source DevOps tools**
 
 - 👨‍💻 All of my projects are available at [aikay-dev.vercel.app](https://aikay-dev.vercel.app/)
 
-- 💬 Ask me about **React, MERN and Node.js**
+- 💬 Ask me about **Python, AWS, Kubernetes, Docker, CI/CD pipelines, monitoring systems, and production reliability**
 
 - 📫 How to reach me **emmanese2020@gmail.com**
 
-- ⚡ Fun fact **I code in my head**
-<p align="center"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=generalaike" alt="generalaike" /></a> </p>
+- ⚡ Fun fact **I automate away toil – if I do something twice, it's getting scripted**
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">

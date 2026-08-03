@@ -31,6 +31,14 @@ const headers: HeadersInit = {
 const subjectLine = (message: string) => message.split("\n")[0];
 
 /**
+ * "Merge remote-tracking branch 'origin/main'" is technically the latest push
+ * and tells a reader nothing. Skip merges and bot noise so the strip shows a
+ * commit that actually describes work.
+ */
+const isNoise = (message: string) =>
+  /^(merge\b|revert\b|bump\b|chore\(deps\)|initial commit$)/i.test(message.trim());
+
+/**
  * Most recent public push across every repo.
  *
  * The public events feed advertises a `commits` array, but in practice it
@@ -53,12 +61,16 @@ export async function getLatestCommit(): Promise<LatestCommit | null> {
 
     const events = (await res.json()) as PushEvent[];
 
+    // Used only if every candidate turns out to be unreadable.
+    let fallback: LatestCommit | undefined;
+
     for (const event of events) {
       if (event.type !== "PushEvent") continue;
 
       // Fast path: the payload actually carried the commits.
       const inlineCommit = event.payload?.commits?.at(-1);
       if (inlineCommit) {
+        if (isNoise(inlineCommit.message)) continue;
         return {
           message: subjectLine(inlineCommit.message),
           repo: event.repo.name.split("/")[1] ?? event.repo.name,
@@ -80,14 +92,25 @@ export async function getLatestCommit(): Promise<LatestCommit | null> {
         `https://api.github.com/repos/${event.repo.name}/commits/${sha}`,
         { headers, next: { revalidate: 3600 } }
       );
-      if (!commitRes.ok) return base;
+      // Can't read the message — fall back rather than losing the strip, but
+      // only if we haven't got a better candidate still to come.
+      if (!commitRes.ok) {
+        fallback ??= base;
+        continue;
+      }
 
       const commit = (await commitRes.json()) as { commit?: { message?: string } };
       const message = commit.commit?.message;
 
-      return message ? { ...base, message: subjectLine(message) } : base;
+      if (!message) {
+        fallback ??= base;
+        continue;
+      }
+      if (isNoise(message)) continue;
+
+      return { ...base, message: subjectLine(message) };
     }
-    return null;
+    return fallback ?? null;
   } catch {
     return null;
   }

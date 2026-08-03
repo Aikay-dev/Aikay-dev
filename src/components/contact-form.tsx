@@ -4,9 +4,20 @@ import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { profile } from "@/content/profile";
 
-const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+/**
+ * These three values are public by design — EmailJS ships them in the browser
+ * bundle on every request, so committing them exposes nothing that a visitor
+ * couldn't already read from view-source. They're checked in as defaults so the
+ * form works on a fresh deploy without a dashboard step; the env vars still win
+ * if they're set.
+ *
+ * The actual protection is the domain allowlist in the EmailJS dashboard
+ * (Account → Security). Without it, anyone can post to this template from
+ * anywhere. Set it.
+ */
+const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "service_zfb79wi";
+const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "template_6auj4p8";
+const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "-g2zYqaCpEj3WhQHd";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
@@ -25,11 +36,45 @@ export function ContactForm() {
     event.preventDefault();
     if (!formRef.current || !configured) return;
 
+    const data = new FormData(formRef.current);
+    const name = String(data.get("name") ?? "").trim();
+    const email = String(data.get("email") ?? "").trim();
+    const company = String(data.get("company") ?? "").trim();
+    const budget = String(data.get("budget") ?? "").trim();
+    const enquiry = String(data.get("message") ?? "").trim();
+
+    /**
+     * The live EmailJS template renders {{name}}, {{email}}, {{message}} and
+     * {{time}} — nothing else. Anything sent under another key is accepted by
+     * the API and then silently dropped, which looks like a working form and
+     * loses half the enquiry.
+     *
+     * So company and budget are folded into the message body rather than sent
+     * as their own variables, and they're also sent individually so they're
+     * already there if the template is ever extended.
+     */
+    const details = [
+      company ? `Company: ${company}` : null,
+      budget ? `Budget: ${budget}` : null,
+    ].filter(Boolean);
+
+    const message = details.length ? `${details.join("\n")}\n\n${enquiry}` : enquiry;
+
     setStatus("sending");
     try {
-      await emailjs.sendForm(SERVICE_ID!, TEMPLATE_ID!, formRef.current, {
-        publicKey: PUBLIC_KEY!,
-      });
+      await emailjs.send(
+        SERVICE_ID!,
+        TEMPLATE_ID!,
+        {
+          name,
+          email,
+          message,
+          company,
+          budget,
+          time: new Date().toLocaleString("en-GB", { timeZone: profile.timezone }),
+        },
+        { publicKey: PUBLIC_KEY! }
+      );
       setStatus("sent");
       formRef.current.reset();
     } catch {

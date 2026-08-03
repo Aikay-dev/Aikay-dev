@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { profile } from "@/content/profile";
 import { ContactForm } from "@/components/contact-form";
 
@@ -39,6 +39,23 @@ export default function ContactPage() {
               <dt className="label mb-2">Based in</dt>
               <dd className="text-sm text-ink-soft">
                 {profile.location} — working with clients across Europe, the UK and Nigeria.
+              </dd>
+            </div>
+
+            <div>
+              <dt className="label mb-2">CV</dt>
+              <dd>
+                <a
+                  href={profile.cv.href}
+                  download={profile.cv.filename}
+                  className="group inline-flex items-center gap-2 text-sm text-ink-soft"
+                >
+                  <span className="link-underline">Download as PDF</span>
+                  <ArrowDown
+                    className="size-3.5 opacity-50 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0.5"
+                    aria-hidden="true"
+                  />
+                </a>
               </dd>
             </div>
 

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowDown } from "lucide-react";
 import { profile } from "@/content/profile";
 import { Reveal } from "@/components/reveal";
 
@@ -26,6 +27,23 @@ export default function AboutPage() {
                   {paragraph}
                 </p>
               ))}
+            </div>
+
+            <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <a
+                href={profile.cv.href}
+                download={profile.cv.filename}
+                className="group inline-flex items-center gap-2 bg-ink px-6 py-3.5 text-sm text-bg transition-opacity duration-300 hover:opacity-85"
+              >
+                Download CV
+                <ArrowDown
+                  className="size-4 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0.5"
+                  aria-hidden="true"
+                />
+              </a>
+              <span className="font-mono text-xs text-ink-muted">
+                PDF · updated {profile.cv.updated}
+              </span>
             </div>
           </div>
 

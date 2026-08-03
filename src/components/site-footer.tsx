@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { profile } from "@/content/profile";
 import { NowPlaying } from "@/components/now-playing";
 
@@ -32,6 +32,19 @@ export function SiteFooter() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <a
+                  href={profile.cv.href}
+                  download={profile.cv.filename}
+                  className="group inline-flex items-center gap-1 text-sm text-ink-soft"
+                >
+                  <span className="link-underline">CV</span>
+                  <ArrowDown
+                    className="size-3.5 opacity-50 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0.5"
+                    aria-hidden="true"
+                  />
+                </a>
+              </li>
             </ul>
           </div>
 

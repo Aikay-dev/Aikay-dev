@@ -110,6 +110,14 @@ export const profile = {
     },
   ],
 
+  /* Lives in public/. The `download` attribute on the links means the browser
+     saves it under this name rather than opening a tab called "blob". */
+  cv: {
+    href: "/Emmanuel-Esekhaigbe-CV.pdf",
+    filename: "Emmanuel-Esekhaigbe-CV.pdf",
+    updated: "August 2026",
+  },
+
   socials: [
     { label: "GitHub", href: "https://github.com/Aikay-dev", handle: "@Aikay-dev" },
     {

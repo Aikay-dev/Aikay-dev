@@ -415,7 +415,7 @@ export const projects: Project[] = [
     discipline: "Non-profit",
     role: "Lead web developer",
     year: "Sep 2025 — Dec 2025",
-    status: "offline",
+    status: "live",
     tagline: "Publishing the fieldwork of a care and rescue charity",
     summary:
       "A charity running feeding, education, outreach and child-welfare programmes had over two hundred photographs of its own fieldwork and nowhere to put them. The site is built around that archive.",
@@ -437,7 +437,10 @@ export const projects: Project[] = [
       "Content structured so staff can extend it without a developer",
     ],
     stack: ["Next.js 15", "React 19", "TypeScript", "Tailwind CSS 4", "Framer Motion"],
-    links: { repo: "https://github.com/Aikay-dev/laurahope" },
+    links: {
+      live: "https://www.laurahopefoundation.org/",
+      repo: "https://github.com/Aikay-dev/laurahope",
+    },
     accent: "#4c3f9e",
     cover: "/images/work/laura-hope-foundation/cover.webp",
     gallery: [

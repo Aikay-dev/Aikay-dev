@@ -12,3 +12,8 @@ yarn-error.log*
 .vercel
 *.tsbuildinfo
 next-env.d.ts
+
+# Screenshot captures land here as PNG and are converted to WebP by
+# scripts/build-work-images.mjs. Only the WebP belongs in the repo — a stray
+# PNG run is ~45MB.
+public/images/work/**/*.png
